@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:float="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Users</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+
+
+<body>
+<div ng-app="usersList" ng-controller="usersCtrl">
+    <table width="100%">
+        <tbody>
+        <tr>
+        <td align="center">
+            <fieldset>
+                <legend>Search</legend>
+                <table>
+                    <tr>
+                        Input one or more filters
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" ng-model="searchname"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Age: </td>
+                        <td><input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="searchage"></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="button" value="Search" ng-click="search(searchname, searchage)"></td>
+                        <td><input type="button" value="Undo filters" ng-click="clearsearch()"></td>
+                    </tr>
+
+                </table>
+            </fieldset>
+        </td>
+            <h1></h1>
+
+            <h1></h1>
+        <td>
+            <fieldset>
+                <legend>Add New User</legend>
+                <table>
+
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" value="name" ng-model="userToAdd.name"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Age</td>
+                        <td><input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0" ng-model="userToAdd.age"></td>
+                    </tr>
+                    <tr>
+                        <td>Is Admin</td>
+                        <td><input type="checkbox" ng-model="userToAdd.admin"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="button" value="Add new user" ng-click="add(userToAdd)">
+                        </td>
+                    </tr>
+
+                </table>
+            </fieldset>
+
+        </td>
+
+            <td>
+                <fieldset>
+                    <legend>Update User's #{{userToEdite.id}} Information</legend>
+                    <table>
+                        <tr>
+                            <td>Name</td>
+                            <td><input type="text" value="name" ng-model="userToEdite.name"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Age</td>
+                            <td><input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0" ng-model="userToEdite.age"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Is Admin</td>
+                            <td><input type="checkbox" ng-model="userToEdite.admin"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="button" value="Save changes" ng-click="update(userToEdite.id, userToEdite)"></td>
+                        </tr>
+
+                    </table>
+                </fieldset>
+
+            </td>
+        </tr>
+        <tr>
+                <table width="100%">
+                    <caption>User List</caption>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Is Admin</th>
+                        <th>Created Date</th>
+                        <th>Edite</th>
+                        <th>Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="cla" ng-repeat="user in users">
+                        <td>{{user.id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.age}}</td>
+                        <td>{{user.admin}}</td>
+                        <td>{{user.date}}</td>
+                        <td>
+                            <input type="image" name="image" src="images/edit.png" width="25"
+                                   ng-click="edit(user)">
+                        </td>
+                        <td>
+                            <input type="image" name="image" src="images/remove.png" width="25"
+                                   ng-click="delete(user.id)">
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+
+
+
+
+        <tr align="center">
+        </tr>
+        <tr>
+            <table>
+                <tbody>
+                <tr>
+                    <td><h4> page: </h4>
+                    <td><input type="button" value=" < " ng-click="prevPage()"></td>
+                    <td> {{page}} / {{ofPages}}</td>
+                    <td><input type="button" value=" > " ng-click="nextPage()"></td>
+                </tr>
+                </tbody>
+            </table>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    Simple CRUD table with Spring boot, Hibernate, MySQL, Tomcat, Maven.
+</p>
+
+</body>
+
+</html>
